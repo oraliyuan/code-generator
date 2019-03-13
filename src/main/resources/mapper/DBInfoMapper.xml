@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="per.oraly.codegenerator.mapper.DBInfoMapper">
+
+    <select id="getTableInfo" resultType="per.oraly.codegenerator.dto.TableInfo">
+        SELECT
+            table_name tableName,
+            ENGINE engine,
+            table_comment comments,
+            create_time createTime
+        FROM
+            information_schema.`TABLES`
+        WHERE
+            table_schema = (SELECT DATABASE())
+        <if test='tableName != null and tableName !=""'>
+            AND table_name = #{tableName}
+        </if>
+    </select>
+
+    <select id="getColumnInfo" resultType="per.oraly.codegenerator.dto.ColumnInfo">
+        SELECT
+            COLUMN_NAME name,
+            data_type dataType,
+            column_type columnType,
+            CHARACTER_MAXIMUM_LENGTH size,
+            IFNULL(column_default, 'NULL') cDefault,
+            column_comment comment,
+            column_key columnKey,
+            extra incrementAble,
+            IS_NULLABLE nullAble
+        FROM
+            information_schema.`COLUMNS`
+        WHERE
+            table_name = #{tableName}
+        AND table_schema = (SELECT DATABASE())
+        ORDER BY
+            ordinal_position
+    </select>
+
+</mapper>

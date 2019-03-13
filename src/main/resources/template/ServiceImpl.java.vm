@@ -1,0 +1,18 @@
+package ${packageName}.app.service.impl;
+
+import ${packageName}.app.service.${className}Service;
+import ${packageName}.domain.repository.${className}Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * ${comments} 应用服务默认实现
+ *
+ * @author ${author} ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+
+    @Autowired
+    private ${className}Repository ${classNameLower}Repository;
+}

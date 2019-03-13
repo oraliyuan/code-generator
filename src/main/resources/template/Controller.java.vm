@@ -1,0 +1,66 @@
+package ${packageName}.api.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.oraly.common.util.Results;
+import org.oraly.common.base.BaseController;
+import org.oraly.common.infra.constant.BaseConstant;
+import org.oraly.common.service.PageParam;
+import ${packageName}.domain.entity.${className};
+import ${packageName}.domain.repository.${className}Repository;
+
+import java.util.List;
+
+/**
+* ${comments} 管理 API
+ * @author ${author} ${datetime}
+*/
+@Api(tags = BaseConstant.DEFAULT)
+@RestController("${className}Controller")
+@RequestMapping("/${routeName}s")
+public class ${className}Controller extends BaseController {
+
+    @Autowired
+    private ${className}Repository ${classNameLower}Repository;
+
+    @Autowired
+    private ${className}Service ${classNameLower}Service;
+
+    @ApiOperation(value = "${comments} 列表")
+    @GetMapping
+    public ResponseEntity<List<${className}>> list(${className} ${classNameLower}, @ApiIgnore PageParam pageParam) {
+        List<${className}> list = ${className}Repository.pageAndSort(${classNameLower}, pageParam);
+        return Result.success(list);
+    }
+
+    @ApiOperation(value = "${comments} 明细")
+    @GetMapping("/{${pkName}}")
+    public ResponseEntity<${className}> detail(@PathVariable Long ${column.pkName}) {
+        ${className} ${classNameLower} = ${className}Repository.selectByPrimaryKey(${column.pkName});
+        return Result.success(${classNameLower});
+    }
+
+    @ApiOperation(value = "批量创建 ${comments}")
+    @PostMapping
+    public ResponseEntity<${className}> create(@RequestBody List<${className}> ${classNameLower}List) {
+        ${classNameLower}Repository.batchInsert(${classNameLower}List);
+        return Result.success(${classNameLower}List);
+    }
+
+    @ApiOperation(value = "修改 ${comments}")
+    @PutMapping
+    public ResponseEntity<${className}> update(${className} ${classNameLower}) {
+        ${classNameLower}Repository.updateByExampleSelective(${classNameLower});
+        return Result.success(${classNameLower});
+    }
+
+    @ApiOperation(value = "删除 ${comments}")
+    @DeleteMapping
+    public ResponseEntity remove(@RequestBody ${className} ${classNameLower}) {
+        ${classNameLower}Repository.delete(${classNameLower});
+        return Result.success();
+    }
+}
+
+

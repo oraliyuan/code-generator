@@ -1,0 +1,44 @@
+package ${packageName}.infra.repository.impl;
+
+import ${packageName}.domain.entity.${className};
+import ${packageName}.domain.repository.${className}Repository;
+import ${packageName}.infra.mapper.${className}Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.github.pagehelper.PageHelper;
+import org.oraly.common.dto.PageParam;
+
+import java.util.List;
+
+/**
+ * ${comments} 资源库实现
+ *
+ * @author ${author} ${datetime}
+ */
+@Component
+public class ${className}RepositoryImpl implements ${className}Repository {
+
+    @Autowired
+    private ${className}Mapper ${classNameLower}Mapper;
+
+    List<${className}> pageAndSort(${className} ${classNameLower}, PageParam pageParam) {
+        PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
+        return ${classNameLower}Mapper.select(${classNameLower});
+    }
+
+    ${className} selectByPrimaryKey(Long ${column.pkName}) {
+        return ${classNameLower}Mapper.selectByPrimaryKey(${column.pkName});
+    }
+
+    int batchInsert(List<${className}> ${classNameLower}List) {
+        return ${classNameLower}Mapper.insertList(${classNameLower}List);
+    }
+
+    int updateByExampleSelective(${className} ${classNameLower}) {
+        return ${classNameLower}Mapper.updateByExampleSelective(${classNameLower});
+    }
+
+    int delete(${className} ${classNameLower}) {
+        return ${classNameLower}Mapper.deleteByPrimaryKey(${classNameLower});
+    }
+}

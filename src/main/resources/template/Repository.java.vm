@@ -1,0 +1,22 @@
+package ${packageName}.domain.repository;
+
+import ${packageName}.domain.entity.${className};
+
+/**
+ * ${comments} 资源库
+ *
+ * @author ${author} ${datetime}
+ */
+public interface ${className}Repository {
+
+
+    List<${className}> pageAndSort(${className} ${classNameLower}, PageParam pageParam);
+
+    ${className} selectByPrimaryKey(Long ${column.pkName});
+
+    int batchInsert(List<${className}> ${classNameLower}List);
+
+    int updateByExampleSelective(${className} ${classNameLower});
+
+    int delete(${className} ${classNameLower});
+}
